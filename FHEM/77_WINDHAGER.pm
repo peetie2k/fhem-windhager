@@ -218,23 +218,26 @@ sub WINDHAGER_Run($) {
     my $readingStartTime = time();
     
     my %heizungsdata = (
-        'Alarmcode',                  '1/60/0/155/4',
-        'Betriebsart',                '1/60/0/155/1',
-        'Betriebsphase',              '1/60/0/155/2',
-        'Betriebsstunden',            '1/60/0/156/2',
-        'Laufzeit_bis_Reinigung',     '1/60/0/156/3',
+        'Alarmcode',                  '1/60/0/2/0/0',
+        'Betriebsart',                '1/60/0/2/59/0',
+        'Betriebsphase',              '1/60/0/2/1/0',
+        'Betriebsstunden',            '1/60/0/2/81/0',
+        'Laufzeit_bis_Reinigung',     '1/60/0/20/61/0',
+		'Laufzeit_bis_HauptReinigung', '1/60/0/20/62/0',
         'WarmWasser_IST',             '1/15/0/114/0',
         'WarmWasser_SOLL',            '1/15/0/114/1',
         'Aussentemperatur',           '1/15/0/115/0',
         'VorlaufTemp_IST',            '1/15/0/116/0',
         'VorlaufTemp_SOLL',           '1/15/0/116/1',
-        'KesselTemp_IST',             '1/60/0/155/0',
-        'KesselTemp_SOLL',            '1/60/0/156/0',
+        'KesselTemp_IST',             '1/15/1/0/7/0',
+		'KesselLeistung(%)',	      '1/60/0/0/9/0',	
+		'BrennkammerTemp',	      '1/60/0/0/45/0',
+        'KesselTemp_SOLL',            '1/15/1/1/7/0',
         'PufferTemp_Unten',           '1/15/0/118/0',
         'KesselReinigung',            '1/60/0/156/3',
         'Kesselleistung',             '1/60/0/156/7',
-        'AbgasTemperatur',            '1/60/0/156/9',
-        'Brennerstarts',              '1/60/0/156/8',
+        'AbgasTemperatur',            '1/60/0/0/11/0',
+        'Brennerstarts',              '1/60/0/2/80/0',
         'Pelletsverbrauch',           '1/60/0/156/10'
     );
     
@@ -349,19 +352,19 @@ sub WINDHAGER_ASHTML()
 
   $ret .= '<div id="ZentralheizungsWidgetDetails" style="position: relative; top: 0px; left: 0px; width:1192px; height:771px;">';
   $ret .= '  <div id="BGPicZentralheizungsWidget" style="position: absolute; top: 0px; left: 0px;">';
-  $ret .= '    <img src="http://192.168.0.40:8083/fhem/images/default/ZentralHeizungSchema.png">';
+  $ret .= '    <img src="/fhem/images/default/ZentralHeizungSchema.png">';
   $ret .= '  </div>';
   $ret .= '  <div id="KesselDetails" style="opacity: 0.8; position: absolute; top: 100px; left: 475px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 160px;   height: 80px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 120px;">'.ReadingsVal('Zentralheizung',"KesselTemp_IST","").'</div>';
-  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 120px;">'.ReadingsVal('Zentralheizung',"KesselTemp_SOLL","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 120px;">'.ReadingsVal('UG.Heizraum.Heizung',"KesselTemp_IST","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 120px;">'.ReadingsVal('UG.Heizraum.Heizung',"KesselTemp_SOLL","").'</div>';
   $ret .= '    ';
-  $ret .= '    <div style="position: absolute; top: 80px; left: 20px;">Reinigung:</div> <div style="position: absolute; top: 80px; left: 120px;">'.ReadingsVal('Zentralheizung',"KesselReinigung","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 80px; left: 20px;">Reinigung:</div> <div style="position: absolute; top: 80px; left: 120px;">'.ReadingsVal('UG.Heizraum.Heizung',"KesselReinigung","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '';
   $ret .= '  <div id="HeizkoerperDetails" style="opacity: 0.8; position: absolute; top: 280px; left: 770px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 90px; height: 20px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('Zentralheizung',"VorlaufTemp_IST","").'</div>';
-#  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('Zentralheizung',"VorlaufTemp_SOLL","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"VorlaufTemp_IST","").'</div>';
+#  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"VorlaufTemp_SOLL","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '';
@@ -372,18 +375,18 @@ sub WINDHAGER_ASHTML()
   $ret .= '';
   $ret .= '';
   $ret .= '  <div id="WarmWasserDetails" style="opacity: 0.8; position: absolute; top: 320px; left: 90px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 90px; height: 40px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('Zentralheizung',"WarmWasser_IST","").'</div>';
-  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('Zentralheizung',"WarmWasser_SOLL","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"WarmWasser_IST","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"WarmWasser_SOLL","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '';
   $ret .= '  <div id="VorlaufDetails" style="opacity: 0.8; position: absolute; top: 490px; left: 810px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 90px; height:   40px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('Zentralheizung',"VorlaufTemp_IST","").'</div>';
-  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('Zentralheizung',"VorlaufTemp_SOLL","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"VorlaufTemp_IST","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 40px; left: 20px;">Soll:</div> <div style="position: absolute; top: 40px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"VorlaufTemp_SOLL","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '  <div id="PufferTempUntenDetails" style="opacity: 0.8; position: absolute; top: 674px; left: 295px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 90px; height: 20px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('Zentralheizung',"PufferTemp_Unten","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Ist:</div> <div style="position: absolute; top: 20px; left: 60px;">'.ReadingsVal('UG.Heizraum.Heizung',"PufferTemp_Unten","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '  <div id="SolarDetails" style="opacity: 0.8; position: absolute; top: 120px; left: 260px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 100px; height: 40px; ">';
@@ -393,7 +396,7 @@ sub WINDHAGER_ASHTML()
   $ret .= '';
   $ret .= '';
   $ret .= '  <div id="AussenTempDetails" style="opacity: 0.8; position: absolute; top: 15px; left: 1000px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 110px; height: 20px; ">';
-  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Aussen:</div> <div style="position: absolute; top: 20px; left: 80px;">'.ReadingsVal('Zentralheizung',"Aussentemperatur","").'</div>';
+  $ret .= '    <div style="position: absolute; top: 20px; left: 20px;">Aussen:</div> <div style="position: absolute; top: 20px; left: 80px;">'.ReadingsVal('UG.Heizraum.Heizung',"Aussentemperatur","").'</div>';
   $ret .= '  </div>';
   $ret .= '';
   $ret .= '  <div id="SolarDeltaDetails" style="opacity: 0.8; position: absolute; top: 300px; left: 300px; border:5px; border-radius: 25px; background: #847f7f; padding: 20px; width: 200px; height: 20px; ">';
